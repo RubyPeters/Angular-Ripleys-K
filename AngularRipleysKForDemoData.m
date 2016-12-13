@@ -8,7 +8,7 @@
 
 %% User Inputs
 
-MainDirectory = 'C:\Users\Ruby\Desktop\GITpaper\'; % Please enter the main directory in which your cropped ROIs are saved.  
+MainDirectory = 'C:\Users\Ruby\Desktop\';      % Please enter the main directory in which your cropped ROIs are saved.  
 cd(MainDirectory);
                         
 r=200;                                         % Please enter the Radius over which to perform the analysis. Default r=200nm
