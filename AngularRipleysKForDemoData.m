@@ -7,6 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% User Inputs
+clear
 
 MainDirectory = '/Users/user/Documents/work/Angular-Ripleys-K/';      % Please enter the main directory in which your cropped ROIs are saved.
 cd(MainDirectory);
@@ -65,26 +66,22 @@ for r=200
         x = Tested_X(j);
         y = Tested_Y(j);
         
-        r_xCoord = [];
-        r_yCoord = [];
-        tDistances = [];
         
-        for h = 1:(NumberPoints-1)
-            
-            if h~=j
-                
-                xVar = xCoord(h);
-                yVar = yCoord(h);
-                tDistance = sqrt ((xVar-x)^2 + (yVar-y)^2);
-                
-                if tDistance < r
-                    r_xCoord = [r_xCoord ; xVar];
-                    r_yCoord = [r_yCoord ; yVar];
-                    tDistances = [tDistances ; tDistance];
-                end
-                
-            end
-        end
+%         
+        r_xCoord = xCoord;
+        r_yCoord = yCoord;
+        tDistances = sqrt ((r_xCoord-x).^2 + (r_yCoord-y).^2);
+        
+        r_xCoord(j) = [];
+        r_yCoord(j) = [];
+        tDistances(j) = [];
+        
+        
+        bad_inds = tDistances >= r;
+        r_xCoord(bad_inds) = [];
+        r_yCoord(bad_inds) = [];
+        tDistances(bad_inds) = [];
+        
         
         % Calculate angles of each vector with the reference vertical vector
         % of length r
@@ -92,7 +89,7 @@ for r=200
         Angles = [];
         NormRef = r;
         
-        for k = 1:size(r_xCoord);
+        for k = 1:size(r_xCoord)
             
             DotProduct = (r_yCoord(k)-y)*r;
             Norm = tDistances(k);
