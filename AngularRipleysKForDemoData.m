@@ -99,16 +99,7 @@ for r=200
         KValues = [];
         
         for k = 1:size(AngleBins)
-            
-            Counter = 0;
-            
-            for l = 1:size(r_xCoord)
-                if (AngleBins(k)<=Angles(l) && (AngleBins(k)+AngleIncrement)>Angles(l))
-                    Counter = Counter + 1;
-                end
-            end
-            
-            KValue = Counter;
+            KValue = sum(AngleBins(k)<=Angles & (AngleBins(k)+AngleIncrement)>Angles);
             KValues = [KValues ; KValue];
             
         end
