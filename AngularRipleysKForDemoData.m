@@ -86,27 +86,15 @@ for r=200
         % Calculate angles of each vector with the reference vertical vector
         % of length r
         
-        Angles = [];
+        
         NormRef = r;
         
-        for k = 1:size(r_xCoord)
-            
-            DotProduct = (r_yCoord(k)-y)*r;
-            Norm = tDistances(k);
-            
-            % To avoid 'reflecting' the points in the left side of the circumference
-            % onto the right one (same value of cosine) we convert from cos
-            % to angle taking into account the x-position of each point with
-            % respect to the x-position of the reference point
-            
-            if (r_xCoord(k)-x<=0)
-                Angle = 360-(acos((DotProduct/(Norm*NormRef)))*180/pi);
-            else
-                Angle = acos((DotProduct/(Norm*NormRef)))*180/pi;
-            end
-            Angles = [Angles ; Angle];
-            
-        end
+        DotProduct = (r_yCoord-y)*r;
+        Norm = tDistances;
+        Angles = acos((DotProduct./(Norm*NormRef)))*180/pi;
+        neg_inds = r_xCoord-x<=0;
+        Angles(neg_inds) = 360-Angles(neg_inds);
+        
         
         KValues = [];
         
