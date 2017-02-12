@@ -65,9 +65,7 @@ for r=200
         
         x = Tested_X(j);
         y = Tested_Y(j);
-        
-        
-%         
+       
         r_xCoord = xCoord;
         r_yCoord = yCoord;
         tDistances = sqrt ((r_xCoord-x).^2 + (r_yCoord-y).^2);
@@ -95,14 +93,7 @@ for r=200
         neg_inds = r_xCoord-x<=0;
         Angles(neg_inds) = 360-Angles(neg_inds);
         
-        
-        KValues = [];
-        
-        for k = 1:size(AngleBins)
-            KValue = sum(AngleBins(k)<=Angles & (AngleBins(k)+AngleIncrement)>Angles);
-            KValues = [KValues ; KValue];
-            
-        end
+        KValues = sum(AngleBins<=Angles.' & (AngleBins+AngleIncrement)>Angles.', 2);
         
         if Shift == 1
             [ShiftedKValues] = ShiftMaxima(KValues);
