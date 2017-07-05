@@ -56,7 +56,7 @@ end
 
 for r=200
     
-    AngleBins = 0:AngleIncrement:(360-AngleIncrement) ; AngleBins=AngleBins';
+    AngleBins = (0:AngleIncrement:(360-AngleIncrement))';
     CumKValues = zeros(size(AngleBins,1),1);
     CumShiftedKValues = zeros(size(AngleBins,1),1);
     AreaSegment = pi*(r^2)*AngleIncrement/360;
